@@ -18,7 +18,7 @@
 			</intent-filter>
 		</activity>
 		<activity
-			android:name=".AddNote">
+			android:name=".EditNote">
 			<meta-data
 				android:name="android.support.PARENT_ACTIVITY"
 				android:value="chill.me.kotlintodo.Home" />

@@ -8,20 +8,21 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import chill.me.kotlintodo.database.addNoteToDatabase
+import chill.me.kotlintodo.database.editNoteInDatabase
 import chill.me.kotlintodo.models.Note
 import chill.me.kotlintodo.states.Priority
 import chill.me.kotlintodo.utility.getCurrentDateTimeFormatted
-import chill.me.kotlintodo.utility.getDateTimeFormatted
-import kotlinx.android.synthetic.main.activity_add_note.*
+import kotlinx.android.synthetic.main.activity_edit_note.*
 import org.joda.time.DateTime
 
-class AddNote : AppCompatActivity() {
-	private var dueDate: DateTime? = null
+class EditNote : AppCompatActivity() {
+	private var existingNote: Note? = null
+	private var dueDate: String? = null
 	private var priority = Priority.Lowest
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setContentView(R.layout.activity_add_note)
+		setContentView(R.layout.activity_edit_note)
 
 		init()
 		connectListeners()
@@ -31,6 +32,15 @@ class AddNote : AppCompatActivity() {
 		supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 		supportActionBar!!.setDisplayShowHomeEnabled(true)
 		supportActionBar!!.setDisplayShowTitleEnabled(false)
+
+		val extras = intent.extras
+		if (extras != null) {
+			existingNote = extras.getParcelable("note")
+			dueDate = existingNote!!.dueDate
+			priority = existingNote!!.priority
+			editNoteTitle.setText(existingNote!!.title)
+			editNoteContent.setText(existingNote!!.content)
+		}
 	}
 
 	private fun connectListeners() {
@@ -41,18 +51,17 @@ class AddNote : AppCompatActivity() {
 	}
 
 	private fun addNote() {
-		val title = addNoteTitle.text.toString()
-		val content = addNoteContent.text.toString()
+		val title = editNoteTitle.text.toString()
+		val content = editNoteContent.text.toString()
 
 		if (title.isEmpty() && content.isEmpty()) return
 
-		val noteToAdd = Note(
-			title,
-			content,
-			getCurrentDateTimeFormatted(),
-			if (dueDate == null) null else getDateTimeFormatted(dueDate!!),
-			priority)
-		addNoteToDatabase(noteToAdd)
+		val noteToAdd = Note(title, content, getCurrentDateTimeFormatted(), dueDate, priority)
+		if (existingNote != null) {
+			noteToAdd.noteId = existingNote!!.noteId
+			editNoteInDatabase(noteToAdd)
+		}
+		else addNoteToDatabase(noteToAdd)
 	}
 
 	override fun onSupportNavigateUp(): Boolean {
@@ -67,21 +76,21 @@ class AddNote : AppCompatActivity() {
 
 	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 		when (item!!.itemId) {
-			R.id.addNoteSetDueDate -> {
+			R.id.editNoteSetDueDate -> {
 				val now = DateTime.now()
 				var displayYear = now.year
 				var displayMonth = now.monthOfYear
 				var displayDay = now.dayOfMonth
 				if (dueDate != null) {
-					displayYear = dueDate!!.year
-					displayMonth = dueDate!!.monthOfYear
-					displayDay = dueDate!!.dayOfMonth
+					displayYear = dueDate!!.substring(0, 2).toInt()
+					displayMonth = dueDate!!.substring(3, 5).toInt()
+					displayDay = dueDate!!.substring(6).toInt()
 				}
 				DatePickerDialog(
-					this, { _, year, month, day -> dueDate = DateTime(year, month, day, 12, 0) },
+					this, { _, year, month, day -> dueDate = "$day/$month/$year" },
 					displayYear, displayMonth, displayDay).show()
 			}
-			R.id.addNoteSetPriority -> {
+			R.id.editNoteSetPriority -> {
 				val dialogBuilder = AlertDialog.Builder(this)
 				dialogBuilder.setTitle("Select Task Priority")
 				dialogBuilder.setSingleChoiceItems(

@@ -34,11 +34,12 @@ class Home : AppCompatActivity() {
 	}
 
 	private fun init() {
+		notesList.addItemDecoration(SpacingDecoration(0, 32, 1))
 		loadNotes()
 	}
 
 	private fun connectListeners() {
-		addNoteFAB.setOnClickListener { startActivity(Intent(this, AddNote::class.java)) }
+		addNoteFAB.setOnClickListener { startActivity(Intent(this, EditNote::class.java)) }
 
 		notesList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 			var lastFirstVisibleItem = 0
@@ -65,9 +66,15 @@ class Home : AppCompatActivity() {
 		if (loadingScreen.visibility != View.VISIBLE) loadingScreen.visibility = View.VISIBLE
 		getNotes {
 			if (loadingScreen.visibility == View.VISIBLE) loadingScreen.visibility = View.GONE
-			notesList.adapter = NoteAdapter(it)
-			notesList.layoutManager = linearLayoutManager
-			notesList.addItemDecoration(SpacingDecoration(0, 32, 1))
+			if (it.isEmpty()) {
+				noNotesSavedMessage.visibility = View.VISIBLE
+				notesList.visibility = View.GONE
+			} else {
+				noNotesSavedMessage.visibility = View.GONE
+				notesList.visibility = View.VISIBLE
+				notesList.adapter = NoteAdapter(this, it)
+				notesList.layoutManager = linearLayoutManager
+			}
 		}
 	}
 }

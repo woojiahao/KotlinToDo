@@ -4,27 +4,23 @@
 	android:layout_height="match_parent"
 	android:clipToPadding="false">
 
-	<LinearLayout
+	<ProgressBar
 		android:id="@+id/loadingScreen"
-		android:layout_width="match_parent"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center" />
+
+	<TextView
+		android:id="@+id/noNotesSavedMessage"
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"
-		android:orientation="vertical">
+		android:text="@string/no_notes_saved"
+		android:textColor="@color/primaryText"
+		android:textSize="18sp"
+		android:textStyle="bold"
+		android:visibility="gone" />
 
-		<ProgressBar
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center" />
-
-		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center"
-			android:text="@string/loading"
-			android:textAlignment="center"
-			android:textSize="18sp" />
-
-	</LinearLayout>
 
 	<android.support.v7.widget.RecyclerView
 		android:id="@+id/notesList"

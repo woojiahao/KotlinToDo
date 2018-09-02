@@ -1,17 +1,20 @@
 package chill.me.kotlintodo.adapters
 
+import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import chill.me.kotlintodo.EditNote
 import chill.me.kotlintodo.R
 import chill.me.kotlintodo.models.Note
 import chill.me.kotlintodo.states.Priority
 import chill.me.kotlintodo.utility.color
 import kotlinx.android.synthetic.main.note_card.view.*
 
-class NoteAdapter(private val notes: List<Note>) : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
-	class ViewHolder(private val v: View) : RecyclerView.ViewHolder(v) {
+class NoteAdapter(private val context: Context, private val notes: List<Note>) : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
+	class ViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
 		fun setNoteTitle(title: String) {
 			v.noteTitle.text = title
 		}
@@ -46,5 +49,12 @@ class NoteAdapter(private val notes: List<Note>) : RecyclerView.Adapter<NoteAdap
 		holder.setNoteContent(note.content)
 		holder.setNoteDueDate(note.dueDate)
 		holder.setNotePriority(note.priority)
+
+		holder.v.setOnClickListener {
+			context.startActivity(
+				Intent(context, EditNote::class.java)
+					.putExtra("note", note)
+			)
+		}
 	}
 }
