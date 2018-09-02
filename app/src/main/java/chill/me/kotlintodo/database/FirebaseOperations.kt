@@ -20,7 +20,7 @@ fun getNotes(onComplete: (List<Note>) -> Unit) =
 		.reference
 		.child("notes")
 		.addListenerForSingleValueEvent(object: ValueEventListener {
-			override fun onCancelled(p0: DatabaseError) = Unit
+			override fun onCancelled(p0: DatabaseError)= Unit
 
 			override fun onDataChange(p0: DataSnapshot) {
 				val notes = mutableListOf<Note>()

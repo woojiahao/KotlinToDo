@@ -23,12 +23,18 @@ class Home : AppCompatActivity() {
 		connectListeners()
 	}
 
+	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+		menuInflater.inflate(R.menu.home_menu, menu)
+		return true
+	}
+
+	override fun onResume() {
+		super.onResume()
+		loadNotes()
+	}
+
 	private fun init() {
-		getNotes {
-			notesList.adapter = NoteAdapter(it)
-			notesList.layoutManager = linearLayoutManager
-			notesList.addItemDecoration(SpacingDecoration(0, 32, 1))
-		}
+		loadNotes()
 	}
 
 	private fun connectListeners() {
@@ -55,8 +61,13 @@ class Home : AppCompatActivity() {
 		})
 	}
 
-	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-		menuInflater.inflate(R.menu.home_menu, menu)
-		return true
+	private fun loadNotes() {
+		if (loadingScreen.visibility != View.VISIBLE) loadingScreen.visibility = View.VISIBLE
+		getNotes {
+			if (loadingScreen.visibility == View.VISIBLE) loadingScreen.visibility = View.GONE
+			notesList.adapter = NoteAdapter(it)
+			notesList.layoutManager = linearLayoutManager
+			notesList.addItemDecoration(SpacingDecoration(0, 32, 1))
+		}
 	}
 }
