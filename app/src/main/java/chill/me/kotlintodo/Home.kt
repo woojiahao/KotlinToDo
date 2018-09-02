@@ -8,11 +8,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.View
 import chill.me.kotlintodo.adapters.NoteAdapter
-import chill.me.kotlintodo.models.Note
-import chill.me.kotlintodo.states.Priority
+import chill.me.kotlintodo.database.getNotes
 import chill.me.kotlintodo.ui.spacing.SpacingDecoration
 import kotlinx.android.synthetic.main.activity_home.*
-import org.joda.time.DateTime
 
 class Home : AppCompatActivity() {
 	private val linearLayoutManager: LinearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -26,49 +24,11 @@ class Home : AppCompatActivity() {
 	}
 
 	private fun init() {
-		val notes = listOf(
-			Note(
-				"Lorem Ipsum",
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc semper rhoncus augue non egestas. Maecenas maximus bibendum pretium.",
-				DateTime.now(),
-				DateTime.now().plusMonths(1),
-				Priority.High
-			),
-			Note(
-				"Lorem Ipsum",
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc semper rhoncus augue non egestas. Maecenas maximus bibendum pretium.",
-				DateTime.now(),
-				DateTime.now().plusMonths(5)
-			),
-			Note(
-				"Lorem Ipsum",
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc semper rhoncus augue non egestas. Maecenas maximus bibendum pretium.",
-				DateTime.now(),
-				DateTime.now().plusMonths(2)
-			),
-			Note(
-				"Lorem Ipsum",
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc semper rhoncus augue non egestas. Maecenas maximus bibendum pretium.",
-				DateTime.now(),
-				DateTime.now().plusMonths(2)
-			),
-			Note(
-				"Lorem Ipsum",
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc semper rhoncus augue non egestas. Maecenas maximus bibendum pretium.",
-				DateTime.now(),
-				DateTime.now().plusMonths(2)
-			),
-			Note(
-				"Lorem Ipsum",
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc semper rhoncus augue non egestas. Maecenas maximus bibendum pretium.",
-				DateTime.now(),
-				DateTime.now().plusMonths(2)
-			)
-		)
-
-		notesList.adapter = NoteAdapter(notes)
-		notesList.layoutManager = linearLayoutManager
-		notesList.addItemDecoration(SpacingDecoration(0, 32, 1))
+		getNotes {
+			notesList.adapter = NoteAdapter(it)
+			notesList.layoutManager = linearLayoutManager
+			notesList.addItemDecoration(SpacingDecoration(0, 32, 1))
+		}
 	}
 
 	private fun connectListeners() {

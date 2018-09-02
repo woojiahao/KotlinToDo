@@ -10,6 +10,8 @@ import android.view.MenuItem
 import chill.me.kotlintodo.database.addNoteToDatabase
 import chill.me.kotlintodo.models.Note
 import chill.me.kotlintodo.states.Priority
+import chill.me.kotlintodo.utility.getCurrentDateTimeFormatted
+import chill.me.kotlintodo.utility.getDateTimeFormatted
 import kotlinx.android.synthetic.main.activity_add_note.*
 import org.joda.time.DateTime
 
@@ -44,7 +46,12 @@ class AddNote : AppCompatActivity() {
 
 		if (title.isEmpty() && content.isEmpty()) return
 
-		val noteToAdd = Note(title, content, DateTime.now(), dueDate, priority)
+		val noteToAdd = Note(
+			title,
+			content,
+			getCurrentDateTimeFormatted(),
+			if (dueDate == null) null else getDateTimeFormatted(dueDate!!),
+			priority)
 		addNoteToDatabase(noteToAdd)
 	}
 

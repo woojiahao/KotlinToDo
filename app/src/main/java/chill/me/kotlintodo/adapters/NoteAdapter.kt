@@ -9,10 +9,8 @@ import chill.me.kotlintodo.models.Note
 import chill.me.kotlintodo.states.Priority
 import chill.me.kotlintodo.utility.color
 import kotlinx.android.synthetic.main.note_card.view.*
-import org.joda.time.DateTime
-import org.joda.time.format.DateTimeFormat
 
-class NoteAdapter(val notes: List<Note>) : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
+class NoteAdapter(private val notes: List<Note>) : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
 	class ViewHolder(private val v: View) : RecyclerView.ViewHolder(v) {
 		fun setNoteTitle(title: String) {
 			v.noteTitle.text = title
@@ -28,10 +26,8 @@ class NoteAdapter(val notes: List<Note>) : RecyclerView.Adapter<NoteAdapter.View
 			v.notePriorityText.text = priority.name
 		}
 
-		fun setNoteDueDate(dueDate: DateTime?) {
-			v.noteDueDate.text =
-				if (dueDate != null) DateTimeFormat.forPattern("dd/MM/yyyy").print(dueDate)
-				else "No due date"
+		fun setNoteDueDate(dueDate: String?) {
+			v.noteDueDate.text = dueDate ?: "No due date"
 		}
 	}
 
