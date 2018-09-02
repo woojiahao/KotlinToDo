@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<EditText
+			android:id="@+id/addNoteTitle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@android:color/white"
+			android:hint="@string/note_title"
+			android:inputType="text"
+			android:padding="8sp"
+			android:textColor="@color/primaryText"
+			android:textSize="20sp"
+			android:textStyle="bold" />
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1sp"
+			android:background="@color/divider" />
+
+		<EditText
+			android:id="@+id/addNoteContent"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="@android:color/white"
+			android:gravity="top"
+			android:hint="@string/note_content"
+			android:inputType="text"
+			android:padding="8sp"
+			android:textColor="@color/primaryText"
+			android:textSize="18sp"
+			android:textStyle="bold" />
+
+	</LinearLayout>
+
+	<android.support.design.widget.FloatingActionButton
+		android:id="@+id/confirmNoteFAB"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="end|bottom"
+		android:layout_margin="16dp"
+		android:src="@drawable/confirm_note_icon" />
+</android.support.design.widget.CoordinatorLayout>

@@ -1,5 +1,6 @@
 package chill.me.kotlintodo
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -70,15 +71,17 @@ class Home : AppCompatActivity() {
 	}
 
 	private fun connectListeners() {
+		addNoteFAB.setOnClickListener { startActivity(Intent(this, AddNote::class.java)) }
+
 		notesList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 			var lastFirstVisibleItem = 0
 			override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
 				super.onScrolled(recyclerView, dx, dy)
 				when {
-					(dy > 0 && fab.visibility == View.VISIBLE) -> fab.hide()
-					(dy < 0 && fab.visibility != View.VISIBLE) -> fab.show()
+					(dy > 0 && addNoteFAB.visibility == View.VISIBLE) -> addNoteFAB.hide()
+					(dy < 0 && addNoteFAB.visibility != View.VISIBLE) -> addNoteFAB.show()
 				}
-				
+
 				val currentFirstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
 
 				when {

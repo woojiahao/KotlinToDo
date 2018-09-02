@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+	<item
+		android:id="@+id/addNoteSetDueDate"
+		android:icon="@drawable/set_due_date_icon"
+		android:title="@string/set_reminder"
+		app:showAsAction="ifRoom" />
+	<item
+		android:id="@+id/addNoteSetPriority"
+		android:icon="@drawable/set_priority_icon"
+		android:title="@string/set_priority"
+		app:showAsAction="ifRoom" />
+</menu>
