@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">KotlinToDo</string>
+	<string name="popup_menu_icon">Popup Menu Icon</string>
 </resources>
