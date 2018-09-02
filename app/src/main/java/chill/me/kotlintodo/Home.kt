@@ -3,6 +3,8 @@ package chill.me.kotlintodo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.View
 import chill.me.kotlintodo.adapters.NoteAdapter
 import chill.me.kotlintodo.models.Note
 import chill.me.kotlintodo.states.Priority
@@ -11,11 +13,17 @@ import kotlinx.android.synthetic.main.activity_home.*
 import org.joda.time.DateTime
 
 class Home : AppCompatActivity() {
+	private val linearLayoutManager: LinearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_home)
 
+		init()
+		connectListeners()
+	}
+
+	private fun init() {
 		val notes = listOf(
 			Note(
 				"Lorem Ipsum",
@@ -55,9 +63,31 @@ class Home : AppCompatActivity() {
 				DateTime.now().plusMonths(2)
 			)
 		)
-		val adapter = NoteAdapter(notes)
-		notesList.adapter = adapter
-		notesList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+		notesList.adapter = NoteAdapter(notes)
+		notesList.layoutManager = linearLayoutManager
 		notesList.addItemDecoration(SpacingDecoration(0, 32, 1))
+	}
+
+	private fun connectListeners() {
+		notesList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+			var lastFirstVisibleItem = 0
+			override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+				super.onScrolled(recyclerView, dx, dy)
+				when {
+					(dy > 0 && fab.visibility == View.VISIBLE) -> fab.hide()
+					(dy < 0 && fab.visibility != View.VISIBLE) -> fab.show()
+				}
+				
+				val currentFirstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
+
+				when {
+					(currentFirstVisibleItem > lastFirstVisibleItem) -> supportActionBar!!.hide()
+					(currentFirstVisibleItem < lastFirstVisibleItem) -> supportActionBar!!.show()
+				}
+
+				lastFirstVisibleItem = currentFirstVisibleItem;
+			}
+		})
 	}
 }
