@@ -19,7 +19,7 @@
 			android:inputType="text"
 			android:padding="8sp"
 			android:textColor="@color/primaryText"
-			android:textSize="20sp"
+			android:textSize="18sp"
 			android:textStyle="bold" />
 
 		<View
@@ -37,8 +37,7 @@
 			android:inputType="text"
 			android:padding="8sp"
 			android:textColor="@color/primaryText"
-			android:textSize="18sp"
-			android:textStyle="bold" />
+			android:textSize="18sp" />
 
 	</LinearLayout>
 

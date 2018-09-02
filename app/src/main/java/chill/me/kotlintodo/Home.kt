@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.Menu
 import android.view.View
 import chill.me.kotlintodo.adapters.NoteAdapter
 import chill.me.kotlintodo.models.Note
@@ -92,5 +93,10 @@ class Home : AppCompatActivity() {
 				lastFirstVisibleItem = currentFirstVisibleItem;
 			}
 		})
+	}
+
+	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+		menuInflater.inflate(R.menu.home_menu, menu)
+		return true
 	}
 }

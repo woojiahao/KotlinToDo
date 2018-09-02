@@ -7,5 +7,5 @@ import org.joda.time.DateTime
 data class Note(val title: String,
 				val content: String,
 				val creationDate: DateTime,
-				val dueDate: DateTime,
+				val dueDate: DateTime? = null,
 				val priority: Priority = Lowest)

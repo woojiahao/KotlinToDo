@@ -5,4 +5,6 @@
 	<string name="note_content">Note Content</string>
 	<string name="set_reminder">Set Reminder</string>
 	<string name="set_priority">Set Priority</string>
+	<string name="search_notes">Search Notes</string>
+	<string name="filter_notes">Filter Notes</string>
 </resources>

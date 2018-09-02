@@ -28,8 +28,10 @@ class NoteAdapter(val notes: List<Note>) : RecyclerView.Adapter<NoteAdapter.View
 			v.notePriorityText.text = priority.name
 		}
 
-		fun setNoteDueDate(dueDate: DateTime) {
-			v.noteDueDate.text = DateTimeFormat.forPattern("dd/MM/yyyy").print(dueDate)
+		fun setNoteDueDate(dueDate: DateTime?) {
+			v.noteDueDate.text =
+				if (dueDate != null) DateTimeFormat.forPattern("dd/MM/yyyy").print(dueDate)
+				else "No due date"
 		}
 	}
 
