@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:id="@+id/filterNameAscending"
+		android:title="@string/ascending_name" />
+
+	<item
+		android:id="@+id/filterNameDescending"
+		android:title="@string/descending_name" />
+
+	<group android:id="@+id/filterPriorityGroup">
+		<item
+			android:id="@+id/filterHighestPriority"
+			android:title="@string/highest_priority" />
+		<item
+			android:id="@+id/filterHighPriority"
+			android:title="@string/high_priority" />
+		<item
+			android:id="@+id/filterMediumPriority"
+			android:title="@string/medium_priority" />
+		<item
+			android:id="@+id/filterLowPriority"
+			android:title="@string/low_priority" />
+		<item
+			android:id="@+id/filterLowestPriority"
+			android:title="@string/lowest_priority" />
+	</group>
+</menu>

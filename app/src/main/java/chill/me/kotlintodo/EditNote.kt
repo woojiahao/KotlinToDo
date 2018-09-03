@@ -28,6 +28,40 @@ class EditNote : AppCompatActivity() {
 		connectListeners()
 	}
 
+	override fun onSupportNavigateUp(): Boolean {
+		onBackPressed()
+		return true
+	}
+
+	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+		menuInflater.inflate(R.menu.add_note_menu, menu)
+		return true
+	}
+
+	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+		when (item!!.itemId) {
+			R.id.editNoteSetDueDate -> {
+				val now = DateTime.now()
+				DatePickerDialog(
+					this, { _, year, month, day -> dueDate = "$day/$month/$year" },
+					now.year, now.monthOfYear, now.dayOfMonth).show()
+			}
+			R.id.editNoteSetPriority -> {
+				val dialogBuilder = AlertDialog.Builder(this)
+				dialogBuilder.setTitle("Select Task Priority")
+				dialogBuilder.setSingleChoiceItems(
+					Priority.values().map { it.name }.toTypedArray(),
+					Priority.valueOf(priority.name).ordinal
+				) { _, selected -> priority = Priority.values()[selected] }
+				dialogBuilder.setPositiveButton("Confirm") { _, _ -> }
+				dialogBuilder.setCancelable(false)
+				dialogBuilder.show()
+			}
+			android.R.id.home -> NavUtils.navigateUpFromSameTask(this)
+		}
+		return true
+	}
+
 	private fun init() {
 		supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 		supportActionBar!!.setDisplayShowHomeEnabled(true)
@@ -60,47 +94,6 @@ class EditNote : AppCompatActivity() {
 		if (existingNote != null) {
 			noteToAdd.noteId = existingNote!!.noteId
 			editNoteInDatabase(noteToAdd)
-		}
-		else addNoteToDatabase(noteToAdd)
-	}
-
-	override fun onSupportNavigateUp(): Boolean {
-		onBackPressed()
-		return true
-	}
-
-	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-		menuInflater.inflate(R.menu.add_note_menu, menu)
-		return true
-	}
-
-	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-		when (item!!.itemId) {
-			R.id.editNoteSetDueDate -> {
-				val now = DateTime.now()
-				var displayYear = now.year
-				var displayMonth = now.monthOfYear
-				var displayDay = now.dayOfMonth
-				if (dueDate != null) {
-					displayYear = dueDate!!.substring(0, 2).toInt()
-					displayMonth = dueDate!!.substring(3, 5).toInt()
-					displayDay = dueDate!!.substring(6).toInt()
-				}
-				DatePickerDialog(
-					this, { _, year, month, day -> dueDate = "$day/$month/$year" },
-					displayYear, displayMonth, displayDay).show()
-			}
-			R.id.editNoteSetPriority -> {
-				val dialogBuilder = AlertDialog.Builder(this)
-				dialogBuilder.setTitle("Select Task Priority")
-				dialogBuilder.setSingleChoiceItems(
-					Priority.values().map { it.name }.toTypedArray(),
-					Priority.valueOf(priority.name).ordinal
-				) { _, selection -> priority = Priority.values()[selection] }
-				dialogBuilder.show()
-			}
-			android.R.id.home -> NavUtils.navigateUpFromSameTask(this)
-		}
-		return true
+		} else addNoteToDatabase(noteToAdd)
 	}
 }

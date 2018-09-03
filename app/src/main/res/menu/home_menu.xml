@@ -2,12 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto">
 	<item
-		android:id="@+id/homeSearchNote"
-		android:icon="@drawable/search_icon"
-		android:title="@string/search_notes"
-		app:showAsAction="ifRoom" />
-	<item
-		android:id="@+id/homeSortNotes"
+		android:id="@+id/homeFilterNotes"
 		android:icon="@drawable/sort_icon"
 		android:title="@string/filter_notes"
 		app:showAsAction="ifRoom" />

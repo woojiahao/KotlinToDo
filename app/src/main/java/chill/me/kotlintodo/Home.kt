@@ -4,16 +4,25 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.RecyclerView
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import chill.me.kotlintodo.adapters.NoteAdapter
 import chill.me.kotlintodo.database.getNotes
+import chill.me.kotlintodo.models.Note
+import chill.me.kotlintodo.states.FilterType
+import chill.me.kotlintodo.states.FilterType.*
+import chill.me.kotlintodo.states.Priority
 import chill.me.kotlintodo.ui.spacing.SpacingDecoration
 import kotlinx.android.synthetic.main.activity_home.*
 
 class Home : AppCompatActivity() {
-	private val linearLayoutManager: LinearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+	private val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+	private val notes = mutableListOf<Note>()
+	private val allNotes = mutableListOf<Note>()
+	private val noteAdapter = NoteAdapter(this, notes)
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -25,6 +34,33 @@ class Home : AppCompatActivity() {
 
 	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 		menuInflater.inflate(R.menu.home_menu, menu)
+		return true
+	}
+
+	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+		when (item!!.itemId) {
+			R.id.homeFilterNotes -> {
+				var filterType: FilterType = None
+				val filterIconView = findViewById<View>(R.id.homeFilterNotes)
+				val popupMenu = PopupMenu(this, filterIconView)
+				popupMenu.menuInflater.inflate(R.menu.filter_menu, popupMenu.menu)
+				popupMenu.setOnMenuItemClickListener { selectedItem ->
+					filterType = when (selectedItem.itemId) {
+						R.id.filterHighestPriority -> Highest
+						R.id.filterHighPriority -> High
+						R.id.filterMediumPriority -> Medium
+						R.id.filterLowPriority -> Low
+						R.id.filterLowestPriority -> Lowest
+						R.id.filterNameAscending -> Ascending
+						R.id.filterNameDescending -> Descending
+						else -> None
+					}
+					filterNotes(filterType)
+					true
+				}
+				popupMenu.show()
+			}
+		}
 		return true
 	}
 
@@ -42,22 +78,12 @@ class Home : AppCompatActivity() {
 		addNoteFAB.setOnClickListener { startActivity(Intent(this, EditNote::class.java)) }
 
 		notesList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-			var lastFirstVisibleItem = 0
 			override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
 				super.onScrolled(recyclerView, dx, dy)
 				when {
 					(dy > 0 && addNoteFAB.visibility == View.VISIBLE) -> addNoteFAB.hide()
 					(dy < 0 && addNoteFAB.visibility != View.VISIBLE) -> addNoteFAB.show()
 				}
-
-				val currentFirstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
-
-				when {
-					(currentFirstVisibleItem > lastFirstVisibleItem) -> supportActionBar!!.hide()
-					(currentFirstVisibleItem < lastFirstVisibleItem) -> supportActionBar!!.show()
-				}
-
-				lastFirstVisibleItem = currentFirstVisibleItem;
 			}
 		})
 	}
@@ -72,9 +98,29 @@ class Home : AppCompatActivity() {
 			} else {
 				noNotesSavedMessage.visibility = View.GONE
 				notesList.visibility = View.VISIBLE
-				notesList.adapter = NoteAdapter(this, it)
+				allNotes.clear()
+				allNotes.addAll(it)
+				refreshNotes(it)
+				notesList.adapter = noteAdapter
 				notesList.layoutManager = linearLayoutManager
 			}
 		}
+	}
+
+	private fun filterNotes(filterType: FilterType) {
+		refreshNotes(allNotes)
+		when (filterType) {
+			Ascending -> notes.sortBy { it.title }
+			Descending -> notes.sortByDescending { it.title }
+			Highest, High, Medium, Low, Lowest ->
+				refreshNotes(notes.filter { it.priority == Priority.valueOf(filterType.name) })
+			None -> notes.sortBy { it.title }
+		}
+		noteAdapter.notifyDataSetChanged()
+	}
+
+	private fun refreshNotes(newNotes: List<Note>) {
+		notes.clear()
+		notes.addAll(newNotes)
 	}
 }
