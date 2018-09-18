@@ -23,23 +23,11 @@ fun editNoteInDatabase(note: Note) =
 		.updateChildren(mapOf(note.noteId!! to note))
 
 
-@Suppress("UNCHECKED_CAST")
 fun getNotes(onComplete: (List<Note>) -> Unit) =
-	FirebaseDatabase
-		.getInstance()
-		.reference
-		.child("notes")
+	FirebaseDatabase.getInstance().reference.child("notes")
 		.addListenerForSingleValueEvent(object : ValueEventListener {
-			override fun onCancelled(p0: DatabaseError) = Unit
+			override fun onCancelled(ds: DatabaseError) = Unit
 
-			override fun onDataChange(p0: DataSnapshot) {
-				val notes = mutableListOf<Note>()
-				for (snapshot in p0.children) {
-					val note = snapshot.getValue(Note::class.java)
-					if (note != null) notes.add(note)
-				}
-
-				onComplete(notes)
-			}
-
+			override fun onDataChange(ds: DataSnapshot) =
+				onComplete(ds.children.mapNotNull { it.getValue(Note::class.java) })
 		})
