@@ -13,6 +13,7 @@ If you are following along with the tutorial, it is best to go through the [set 
 
 ## Documentation Navigation
 * **Setting up your development environment?** [Set-Up Instructions](setup.md)
+* **Need the project files?** [Get the code](setup.md?id=project-files)
 * **Connecting to Firebase?** [Firebase Guide](setup.md)
 * **Making the application?** [Tutorial](setup.md)
 

@@ -55,3 +55,12 @@ These set of steps are ideal if you own an Android device that has Nougat and ab
 Whilst configuring your emulator, you might encounter some difficulties, a list of issues and fixes can be found on the [official Android developer site.](https://developer.android.com/studio/run/emulator-troubleshooting)
 
 Another common issue encountered might be virtualization, and once again, the [official Android developer site](https://developer.android.com/studio/run/emulator-acceleration) covers a fix for these.
+
+## Project Files
+1. Navigate to the [**GitHub repository**.](https://github.com/woojiahao/KotlinToDoBare)
+2. Select the option to **Clone or download** the repository.
+3. Then, choose to **Download ZIP** to the location on your computer where you wish to keep the project files.
+4. Unzip the downloaded file.
+5. Launch Android Studio.
+6. Select the option to **Import a project from Gradle** and navigate to the downloaded folder, select the root folder of the project and click **OK**.
+7. Run the application on your emulator/device and you should be greeted with a bare bones Hello World application with some files included beforehand.
