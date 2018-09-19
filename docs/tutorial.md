@@ -22,3 +22,4 @@ With these requirements in mind, we can gauge that we will need the following:
 For this application, we will be using **Firebase** to store the todos, a **RecyclerView** to list out the data and use a set of constants stored in an **enumeration**.
 
 ## What next? {docsify-ignore}
+Follow the tutorial in the order in which they appear in the side bar.
