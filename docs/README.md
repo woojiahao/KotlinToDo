@@ -29,3 +29,5 @@ If you have taken an interest in Kotlin, these are several resources that you ca
 You can reach me via Discord, my discord handle is `@Chill#4048`
 
 You can view my other projects on [GitHub.](https://github.com/woojiahao)
+
+<p><small>Website created using <a href="https://docsify.js.org/#/">docsify</a></small></p>

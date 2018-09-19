@@ -8,14 +8,14 @@ The installation process of Android Studio is relatively simple and painless but
 ## Configuring an Emulator
 These set of steps are ideal if you do not own an Android device that has Nougat and above running on it.
 
-### Creating the Emulator
+### Creating the Emulator {docsify-ignore}
 1. Navigate to **Tools > AVD Manager > Create Virtual Device**.
 2. Select **Nexus 6** for the device definition and click **Next**.
 3. If you do not have a system image for **API level 25** yet, download the image and follow the set up steps. (This step will take about 5 minutes on a good network connection)
 4. Once you have **API level 25** installed, select it and click **Next**.
 5. Leave all the defaults as is and select **Finish**.
-
-### Testing the Emulator
+ 
+### Testing the Emulator {docsify-ignore}
 1. Open Android Studio
 2. Select **Start a new Android Studio project**
 3. In the following screen, enter the following select **Next**:
@@ -36,7 +36,7 @@ These set of steps are ideal if you do not own an Android device that has Nougat
 ## Configuring a Device
 These set of steps are ideal if you own an Android device that has Nougat and above running on it.
 
-### Set Up
+### Set Up {docsify-ignore}
 1. Go to the **settings** in your phone.
 2. Navigate to **About phone > Software information**.
 3. You should be able to find an option for **Build number**. 
@@ -44,7 +44,7 @@ These set of steps are ideal if you own an Android device that has Nougat and ab
 5. Return to the home of your settings and a new option should show up aptly labelled **Developer options**.
 6. Enable these developer options and scroll down to find the option **USB debugging** and enable that.
 
-### Testing the Device
+### Testing the Device {docsify-ignore}
 1. Follow the instructions from **step 1 to 8** from this [guide.](setup.md?id=testing-the-emulator)
 2. Plug your phone into your computer via a USB cable.
 3. A popup might appear prompting you to grant your computer access to your phone, select **Allow** if it does.
@@ -57,6 +57,7 @@ Whilst configuring your emulator, you might encounter some difficulties, a list 
 Another common issue encountered might be virtualization, and once again, the [official Android developer site](https://developer.android.com/studio/run/emulator-acceleration) covers a fix for these.
 
 ## Project Files
+### Getting the files {docsify-ignore}
 1. Navigate to the [**GitHub repository**.](https://github.com/woojiahao/KotlinToDoBare)
 2. Select the option to **Clone or download** the repository.
 3. Then, choose to **Download ZIP** to the location on your computer where you wish to keep the project files.
@@ -64,3 +65,10 @@ Another common issue encountered might be virtualization, and once again, the [o
 5. Launch Android Studio.
 6. Select the option to **Import a project from Gradle** and navigate to the downloaded folder, select the root folder of the project and click **OK**.
 7. Run the application on your emulator/device and you should be greeted with a bare bones Hello World application with some files included beforehand.
+
+### What is included? {docsify-ignore}
+The project folder includes the following:
+
+* Layout files
+* **SpacingDecoration.kt** 
+* **SpacingDecorationError.kt**

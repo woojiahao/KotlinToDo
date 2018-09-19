@@ -2,4 +2,6 @@
 
 * [Home](/)
 * [Setting Up](setup.md)
-* [Tutorial](tutorial.md)
+* [Kotlin Basics](kotlin_basics.md)
+* [Pre-planning](tutorial.md)
+* [Listing Information](listing_information.md)
