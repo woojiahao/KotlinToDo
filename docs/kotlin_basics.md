@@ -61,6 +61,13 @@ Or if the method body is simply returning a value, you can omit the return type 
 fun getName() = "John"
 ```
 
+### Optional Parameters
+Kotlin supports the use of optional parameters, which can be declared in this manner:
+
+```kotlin
+fun foo(val x: String = "", val y: Int = 0)
+```
+
 More on [Kotlin Functions.](https://kotlinlang.org/docs/reference/functions.html)
 
 ## Classes

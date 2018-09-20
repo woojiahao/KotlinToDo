@@ -1,9 +1,4 @@
-# Tutorial
-At the end of the tutorial, you will have a fully-functioning, simple todo application that is capable of storing the data on Firebase.
-
-A completed version can be found in the [official repository.](https://github.com/woojiahao/KotlinToDo)
-
-## Pre-Planning
+# Pre-Planning
 With any project, we have to perform some pre-planning for the design of our application.
 
 We know that the following should be present in our application (in order of importance):
