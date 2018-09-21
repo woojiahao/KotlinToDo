@@ -135,7 +135,7 @@ We have created all the building blocks to use the RecyclerView.
 
 **Follow Along:**
 
-1. Inside `Home.kt`'s `onCreate` method, add the following:
+1. Inside `Home.kt`'s `init()` method, add the following:
    
    ```kotlin
    val notes = listOf(

@@ -87,3 +87,58 @@ For the `AddNote` activity to successfully add a new note, we simply add a click
 
 Once the note is added, we want to close out the AddNote activity as a simple quality of life improvement.
 
+## Retrieving Data
+Now that we have devised a strategy to store note data into Firebase, we have to be able to retrieve it and load up this notes into the RecyclerView we created previously. 
+
+1. Inside `FirebaseOperations.kt` add the following function:
+   
+   ```kotlin
+   fun getNotes(onComplete: (List<Note>) -> Unit) { 
+        FirebaseDatabase.getInstance().reference.child("notes")
+            .addListenerForSingleValueEvent(object: ValueEventListener {
+                override fun onCancelled(e: DatabaseError) = Unit
+
+                override fun onDataChange(ds: DataSnapshot) {
+                    val notes = mutableListOf<Note>()
+                    for (child in ds.children) {
+                        val note = snapshot.getValue(Note::class.java)
+                        if (note != null) {
+                            notes.add(note)
+                        }
+                    }
+
+                    onComplete(notes)
+                }
+            })
+   }
+    ```
+
+2. Inside `Home.kt` replace the code in `init()` with this:
+   
+   ```kotlin
+   notesList.addItemDecoration(SpacingDecoration(0, 32, 1))
+   notesList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+   getNotes {
+       notesList.adapter = NoteAdapter(this, it)
+   }
+   ```
+
+3. Run the application and it should be retrieving the stored notes in Firebase and displaying them in the RecyclerView.
+
+**Break Down:**
+
+We have to create a function to retrieve the data from Firebase. We use the `addListenerForSingleValueEvent` since this is a one-time use method and fits our needs perfectly.
+
+When we receive all the key-value pairs in the `notes` node in the realtime database, we need to create a list of the notes that is stored in that node by iterating through the children of that node.
+
+A data snapshot is an instance of what the values of a node looks like in the realtime database at the time of the retrieval.
+
+We then retrieve each child as a `Note` and add it to the list. Once the notes are all retrieved, they are used for the `onComplete` function. 
+
+We make use of a lambda in this instance as we do not know what we might be doing with the loaded set of notes but we want to retain the fact that we want to be able to perform some action when we get the notes.
+
+This behavior is utilised in the **Home** activity when we change the way the RecyclerView is loaded. Instead of loading in a set of pre-made data, we load in the data from Firebase by using the `getNotes` function we have created previously and as the `onComplete` behaviour, we set it to utilise the list of notes that was loaded to fill the RecyclerView's note adapter and display them.
+
+***
+
+Next: [Adding Priorities](/)
