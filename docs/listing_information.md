@@ -178,5 +178,4 @@ This holds several benefits, one being it enforcing the idea that all ids should
 
 ***
 
-At this point, we have completed the first part of building the application. 🎉
-
+Next: [Storing and retrieving data](firebase.md)
