@@ -70,6 +70,109 @@ fun foo(val x: String = "", val y: Int = 0)
 
 More on [Kotlin Functions.](https://kotlinlang.org/docs/reference/functions.html)
 
+## Lambdas
+A concept very prevalent in Kotlin is the idea of **lambdas**. In Kotlin, functions are considered [first-class citizens](https://stackoverflow.com/questions/5178068/what-is-a-first-class-citizen-function) which means that you are able to pass a function as an argument to another function, essentially, packaging a set of behavior for another function to use later on.
+
+### Passing functions as arguments
+This idea of passing functions from one method to another is not a new one, and is implemented in many languages, with varying degrees of complexity involved.
+
+For instance, in Python and Javascript, you can just pass a function name to another function and execute it, no set up involved. 
+
+```python
+def baz(x):
+    return x ** 2
+
+def foo(bar):
+    bar(10)
+
+print(foo(baz)) #  This prints "100"
+```
+
+In the code above, the function `foo` receives a function as an argument and it will execute the function it receives, passing that function a value of 10. As you can see, the behavior of `baz` is given to foo so that is can be used later on.
+
+### Implementing lambdas in Kotlin 
+Lambdas require a specific format to be implemented in Kotlin. This format can be thought of as a contract, where the lambda initially creates a format that all functions to be passed have to follow ([Function Type](https://kotlinlang.org/docs/reference/lambdas.html#function-types)), and then the functions to be passed to these parameters, will follow the format.
+
+#### Function types
+
+> A function type is a special notation that corresponds to the signatures of the function, i.e. their parameters and return values
+
+A function type will be used to declare the **inputs** of the function and what this function will **output**.
+
+```kotlin
+fun foo(func: () -> Unit) {  }
+```
+
+In the example above, `func` is a function type. The function takes in no parameters, as seen by the `()` and it returns nothing, via `Unit`. Other types of function types can look like:
+
+```kotlin
+fun foo(func: (Int) -> Int) {  }
+```
+ 
+A function that takes an integer and returns an integer.
+
+```kotlin
+fun foo(func: (String, Int) -> String) {  }
+```
+
+A function that takes a string and an integer and returns a string.
+
+#### Creating lambdas
+After you have created a function type, you can now pass a lambda to the function.
+
+It is important to note that all lambdas are enclosed within `{}`.
+
+```kotlin
+fun foo(func: (Int) -> Int) = func(10)
+println(foo({ input -> input * 2 })) // This prints "20"
+```
+
+In this case, the lambda defines the behavior where the input received will be doubled. And `foo` passes an input of 10, thus, the program prints 20.
+
+### it
+In cases where the function type only takes in 1 input, the initial declaration of the input name can be omitted as such and referred to using the `it` keyword:
+
+```kotlin
+fun foo(func: (Int) -> Int) = func(10)
+println(foo({ it * 2 })) // This prints "20"
+```
+
+### Lambdas as the last argument
+If a function type is the last parameter of a function, or the only parameter of the function, they can be declared outside of the parantheses, `()` and in the case where a function type is the only parameter, the parantheses can be completely omitted.
+
+```kotlin
+fun foo(name: String, age: String, func: (Int) -> Int) =
+    "My name is $name, I am $age years old," + 
+    " if you take my age and do some magic, you get ${func(age)}"
+
+// This prints:
+// "My name is John, I am 18 years old, if you take my age and do some magic, you get 39" 
+println(
+    foo("John", 18) {
+        (it * 2) + 3
+    }
+) 
+```
+
+In that example, since `func` was the last parameter, it was moved outside of the parantheses.
+
+```kotlin
+fun foo(func: (String, Int) -> String) = func("John", 18)
+
+// This prints:
+// "I am John, I am 18 years old"
+println(
+    foo {
+        name, age ->
+            "I am $name, I am $age years old"
+    }
+)
+```
+
+In that example, we completely omitted the use of parantheses because the function type was the only parameter for `foo`.
+
+More on [Kotlin Lambdas.](https://kotlinlang.org/docs/reference/lambdas.html#higher-order-functions-and-lambdas)
+
 ## Classes
 Classes do not require a class body if there are no additional methods or instance variables in the class.
 

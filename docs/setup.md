@@ -69,6 +69,16 @@ Another common issue encountered might be virtualization, and once again, the [o
 ### What is included? {docsify-ignore}
 The project folder includes the following:
 
-* Layout files
-* **SpacingDecoration.kt** 
-* **SpacingDecorationError.kt**
+**Kotlin Files:**
+
+* Home.kt
+* AddNote.kt
+* SpacingDecoration.kt
+* SpacingDecorationError.kt
+* Direction.kt
+
+**Layout Files:**
+
+* activity_home.xml
+* activity_add_note.xml
+* note_card.xml

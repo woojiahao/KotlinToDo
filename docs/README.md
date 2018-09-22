@@ -11,14 +11,8 @@ Simple To-Do application created using Kotlin
 ## Following Along
 If you are following along with the tutorial, it is best to go through the [set up](setup.md) instructions for Android Studio before the talk in order to reduce the amount of time spent setting up everything.
 
-## Documentation Navigation
-* **Setting up your development environment?** [Set-Up Instructions](setup.md)
-* **Need the project files?** [Get the code](setup.md?id=project-files)
-* **Connecting to Firebase?** [Firebase Guide](setup.md)
-* **Making the application?** [Tutorial](setup.md)
-
 ## Further Reading
-If you have taken an interest in Kotlin, these are several resources that you can use to learn about more about it:
+If you have taken an interest in Kotlin, these are several resources that you can use to learn about more about it and see how it is being used:
 
 * [Kotlin documentations](https://kotlinlang.org/docs/reference/)
 * [HotBot](https://gitlab.com/Aberrantfox/hotbot)
