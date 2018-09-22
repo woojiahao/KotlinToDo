@@ -22,6 +22,23 @@ You can explicitly specify the data type of a variable in Kotlin, using the `: <
   
 This, however, is not a magic bullet as there might be instances where the compiler is unable to determine the type of a variable as it might not be initialized or it might be making use [generics.](https://kotlinlang.org/docs/reference/generics.html)
 
+**Note:** All data types in Kotlin are objects, so they all start with an uppercase.
+
+#### Data type list
+* Int
+* Short 
+* Long
+* Double
+* Float
+* String
+* Char
+* Unit
+
+#### Unit
+`Unit` is a special kind of data type Kotlin has. It is used to represent a `void` return type or nothing.
+
+It was included as it is key when concepts like [lambdas](kotlin_basics.md?id=lambdas) come into play.
+
 ### String interpolation
 You can use variables and perform operations within a String using [String interpolation](https://kotlinlang.org/docs/reference/idioms.html)
 
