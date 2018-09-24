@@ -226,3 +226,62 @@ println(tim.greet())
 ```
 
 More on [Kotlin Classes.](https://kotlinlang.org/docs/reference/classes.html)
+
+## Null Safety
+Like mentioned previously, Kotlin enforces the concept of null safety, where you are not able to create or assign null to objects unless you use a specific operator.
+
+### ?
+The `?` operator is used to denote that a data type is nullable. For instance:
+
+```kotlin
+val name = null             // This fails as String is not nullable
+val name: String? = null    // This works as String is now nullable
+```
+
+### !!
+The `!!` operator will attempt to convet any value to a non-null type and if the value is actually null, it will throw an error.
+
+```kotlin
+val name: String? = null
+println(name!!.length)      // This throws an error as name is null
+```
+
+### ?.
+If you do not want the value to be converted to a non-null type or do not want the program to throw an error if the value is null, you can use `?.` or **safe calls** instead. 
+
+Using the operator in that order will make it so any value that is not null will perform the following action, otherwise, the expression will return null, which can be handled later on.
+
+```kotlin
+var name: String? = null
+println(name?.length)       // This prints null
+name = "Bob"
+println(name?.length)       // This prints "3"
+```
+
+#### let
+The method `let` pairs well with the concept of safe calls as it will only execute the body if the value is not null.
+
+```kotlin
+val names: Array<String?> = arrayOf(
+    "John", null, "Bob"
+) 
+names.forEach {
+    it?.let { val -> print(val) } // This prints "JohnBob", ignoring null
+}
+```
+
+### ?:
+The `?:` or **elvis operator** is used when you want to retrieve the value of a data and perform a specific action if the value is null.
+
+This can be done to return from a function if the value is null.
+
+```kotlin
+fun foo(i: String?) {
+    i ?: return
+
+    println(i)
+}
+
+foo(null) // This prints nothing
+foo("Hi") // This prints "Hi"
+```
