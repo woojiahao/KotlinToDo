@@ -20,7 +20,9 @@ If you have taken an interest in Kotlin, these are several resources that you ca
 * [Exposed framework](https://github.com/JetBrains/Exposed)
 
 ## Contact Me
-You can reach me via Discord, my discord handle is `@Chill#4048`
+You can reach me via Discord, my discord handle is `@Chill#4048`.
+
+I also moderate the largest programming discord server, feel free to [drop by.](https://discord.gg/programming) 🙂
 
 You can view my other projects on [GitHub.](https://github.com/woojiahao)
 

@@ -2,6 +2,7 @@
 
 * [Home](/)
 * [Setting Up](setup.md)
+* [Kotlin's History](kotlin_history.md)
 * [Kotlin Basics](kotlin_basics.md)
 * [Pre-planning](pre_planning.md)
 * [Listing Information](listing_information.md)
