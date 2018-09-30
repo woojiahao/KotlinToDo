@@ -10,7 +10,6 @@ import chill.me.kotlintodo.EditNote
 import chill.me.kotlintodo.R
 import chill.me.kotlintodo.models.Note
 import chill.me.kotlintodo.states.Priority
-import chill.me.kotlintodo.utility.color
 import kotlinx.android.synthetic.main.note_card.view.*
 
 class NoteAdapter(private val context: Context, private val notes: List<Note>) : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
@@ -24,8 +23,8 @@ class NoteAdapter(private val context: Context, private val notes: List<Note>) :
 		}
 
 		fun setNotePriority(priority: Priority) {
-			v.notePriorityColorBox.setBackgroundColor(priority.color.color)
-			v.notePriorityText.setTextColor(priority.color.color)
+			v.notePriorityColorBox.setBackgroundColor(priority.parseColor())
+			v.notePriorityText.setTextColor(priority.parseColor())
 			v.notePriorityText.text = priority.name
 		}
 
