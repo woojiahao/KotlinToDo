@@ -1,5 +1,7 @@
 # Kotlin Basics
-Quick overview of the basic syntax of Kotlin, more about the nuances in Kotlin's syntax can be found in the [Kotlin documentation.](https://kotlinlang.org/docs/reference)
+Quick overview of the basic syntax of Kotlin. 
+
+Kotlin is a monolith language with many nuances and it can take an entire day just to discuss them all, to learn more about the Kotlin's syntax, you can reference the [Kotlin documentation.](https://kotlinlang.org/docs/reference)
 
 ## Variables
 Variables in Kotlin are declared relatively simply and in different ways with minute differences:
@@ -21,6 +23,13 @@ The `var` keyword makes the variable `str` mutable, meaning that its value can b
 You can explicitly specify the data type of a variable in Kotlin, using the `: <data type>` syntax, however, most of the time, this is not necessary as Kotlin provides [type inference](https://www.packtpub.com/mapt/book/application_development/9781787126367/2/ch02lvl1sec18/type-inference) meaning that it can determine the type of the variable just by the data you initialize it with.
   
 This, however, is not a magic bullet as there might be instances where the compiler is unable to determine the type of a variable as it might not be initialized or it might be making use [generics.](https://kotlinlang.org/docs/reference/generics.html)
+
+For example, if you are to define a mutable list without providing any predefined values to the list, the compiler is unable to determine what the type of the list will be, and thus, this has to be explicity specified:
+
+```kotlin
+val items = mutableListOf()                         // This is invalid
+val items: MutableList<String> = mutableListOf()    // This is valid
+```
 
 **Note:** All data types in Kotlin are objects, so they all start with an uppercase.
 
@@ -285,3 +294,5 @@ fun foo(i: String?) {
 foo(null) // This prints nothing
 foo("Hi") // This prints "Hi"
 ```
+
+More on [Kotlin Null Safety.](https://kotlinlang.org/docs/reference/null-safety.html)
