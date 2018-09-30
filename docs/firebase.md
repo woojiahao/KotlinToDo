@@ -101,10 +101,8 @@ Now that we have devised a strategy to store note data into Firebase, we have to
                 override fun onDataChange(ds: DataSnapshot) {
                     val notes = mutableListOf<Note>()
                     for (child in ds.children) {
-                        val note = snapshot.getValue(Note::class.java)
-                        note?.let {
-                            notes.add(it)
-                        }
+                        val note = child.getValue(Note::class.java)
+                        note?.let { notes.add(it)  }
                     }
 
                     onComplete(notes)
