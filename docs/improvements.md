@@ -10,6 +10,8 @@ This is akin to the [stream API](https://docs.oracle.com/javase/8/docs/api/java/
 
 The core 3 methods used will be **.forEach()**, **.map()** and **.filter()**
 
+These are advantageous to use over traditional means as it offers a far more straight-forward approach to list manipulation and reading chains of these methods are a lot easier to digest than when everything is embedded within a for loop. [This video](https://youtu.be/1OpAgZvYXLQ) goes into the advantages of using such constructs.
+
 ### .forEach()
 `forEach()` will loop through an entire list whilst you supply some set of behavior to execute for each element in the list.
 
@@ -34,7 +36,7 @@ for (fruit in fruits) {
 fruits.forEach { println("The fruit is: ${it}")}
 ```
 
-In both cases, it will print **"The fruit is: &lt;fruit name&gt;"** for every fruit in the list. However, using the `forEach()` method makes the intent a lot clearer and the code is a lot more concise.
+In both cases, it will print **"The fruit is: &lt;fruit name&gt;"** for every fruit in the list. 
 
 ### .map()
 `map()` will loop through a list of data and return a new list of data based on a set of actions that to be performed on the original list of data.
@@ -59,7 +61,7 @@ for (number in numbers) {
 val newNumbers = numbers.map { it * 2 }
 ```
 
-In both cases, `newNumbers` is a new list of numbers with each number being twice of that in the original `numbers` list ([2, 4, 6, 8, 10, 12, 14, 16, 18, 20]). However, when you use the `map()` method, your intent is a lot clearer and you do not need to set up a for loop just to go through every item in the list and adding them manually to the new list.
+In both cases, `newNumbers` is a new list of numbers with each number being twice of that in the original `numbers` list ([2, 4, 6, 8, 10, 12, 14, 16, 18, 20]). 
 
 ### .filter()
 `filter()` will loop through a list of data and return a new list that consists of the elements of the original list that passes a Boolean condition.
@@ -84,7 +86,7 @@ for (number in numbers) {
 val evenNumbers = numbers.filter { it % 2 == 0 }
 ```
 
-In both cases, the even numbers is extracted from the original list of numbers and added to the new list, `evenNumbers`. However, by using the `filter()` method, you are able to define the same behavior in not only less lines, but also have a much clearer method of delivering the purpose of the code.
+In both cases, the even numbers is extracted from the original list of numbers and added to the new list, `evenNumbers`. 
 
 ### Chaining methods
 These collection methods are not just one-use only. They can be chained one after the other to form method chains that perform a set of sequential operations on a list of data.
@@ -99,8 +101,10 @@ val fruits = listOf(
 //  and add the word "Not" before each of them 
 //  and print this new list
 
-val notBFruits = fruits
-                .filter { it.startsWith("B") }
-                .map { "Not ${it}" }
-                .forEach { println("This is ${it}") }
+fruits
+    .filter { it.startsWith("B") }
+    .map { "Not ${it}" }
+    .forEach { println("This is ${it}") }
 ```
+
+## Using Collections in KotlinToDo
