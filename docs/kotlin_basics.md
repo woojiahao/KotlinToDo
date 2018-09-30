@@ -61,6 +61,56 @@ println("I will be ${age + 10} in 10 years time")
 
 More on [Kotlin Variables.](https://kotlinlang.org/docs/reference/basic-syntax.html)
 
+## Control Flow
+Kotlin has very similar flow control as Java and any other common languages.
+
+### if
+`if` statements are used to check against a Boolean expression
+
+```kotlin
+val age = 18
+if (age < 35) {
+    println("Young one") // This prints "Young one"
+} else {
+    println("Old one")
+}
+```
+
+### when
+`when` statements are similar to `switch` statements in more traditional languages.
+
+```kotlin
+val selection = 1
+when (selection) {
+    0 -> println("You selected 0")
+    1 -> println("You selected 1")
+    2 -> println("You selected 2")
+} // This prints "You selected 1"
+```
+
+### while
+`while` loops are used to continually perform a set of actions while a Boolean condition is true.
+
+```kotlin
+val counter = 1
+while (counter < 10) {
+    print(counter + " ") // This prints "1 2 3 4 5 6 7 8 9"
+    counter++
+}
+```
+
+### for
+`for` loops are used primarily to loop through a list of items in Kotlin.
+
+```kotlin
+val names = arrayOf(
+    "John", "Mary", "Zoe", "Peter"
+)
+for (name in names) {
+    println(name + " ") // This prints "John Mary Zoe Peter"
+}
+```
+
 ## Functions
 Kotlin allows for functions to be declared in the global scope (not within any class), this makes creating utility functions a lot easier for Kotlin as they are not needed to be tied down into a single class.
 
