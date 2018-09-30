@@ -8,3 +8,4 @@
 * [Listing Information](listing_information.md)
 * [Storing And Retrieving Data](firebase.md)
 * [Adding Priorities](priority_system.md)
+* [Improving KotlinToDo](improvements.md)

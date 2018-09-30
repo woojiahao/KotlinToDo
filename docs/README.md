@@ -17,6 +17,8 @@ The talk will be split into 3 sections:
 * **Building the application** - begin with building the application
 * **Enhancing the program** - enhance the existing code base using Kotlin's advanced features
 
+The slides used for the talk can be found [here.](https://github.com/woojiahao/KotlinToDo/blob/master/docs/Slides.pptx)
+
 ## Further Reading
 If you have taken an interest in Kotlin, these are several resources that you can use to learn about more about it and see how it is being used:
 
@@ -30,4 +32,4 @@ You can reach me via Discord, my discord handle is `@Chill#4048`.
 
 You can view my other projects on [GitHub.](https://github.com/woojiahao)
 
-<p><small>Website created using <a href="https://docsify.js.org/#/">docsify</a></small></p>
+<p><small>Website created by <strong>Woo Jia Hao</strong> using <a href="https://docsify.js.org/#/"><strong>docsify</strong></a></small></p>

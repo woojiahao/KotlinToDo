@@ -175,7 +175,3 @@ When making both the NoteAdapter and creating the RecyclerView, you might have n
 > You can reference a component in the layout just by referencing the id of that component.
 
 This holds several benefits, one being it enforcing the idea that all ids should be unique.
-
-***
-
-Next: [Storing and retrieving data](firebase.md)

@@ -138,7 +138,3 @@ We then retrieve each child as a `Note` and add it to the list. Once the notes a
 We make use of a lambda in this instance as we do not know what we might be doing with the loaded set of notes but we want to retain the fact that we want to be able to perform some action when we get the notes.
 
 This behavior is utilised in the **Home** activity when we change the way the RecyclerView is loaded. Instead of loading in a set of pre-made data, we load in the data from Firebase by using the `getNotes` function we have created previously and as the `onComplete` behaviour, we set it to utilise the list of notes that was loaded to fill the RecyclerView's note adapter and display them.
-
-***
-
-Next: [Adding Priorities](priority_system.md)

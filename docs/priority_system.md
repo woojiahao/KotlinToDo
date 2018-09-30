@@ -247,7 +247,3 @@ After all of the changes, we need to update the RecyclerView to display the prio
 We created a method for the holder to set the priority of the note as well as make the changes to the color of the box and the text.
 
 Then when we are binding the list item to the note, we set the priority.
-
-***
-
-Next: [Improving The Code](/)
