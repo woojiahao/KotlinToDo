@@ -82,3 +82,7 @@ The project folder includes the following:
 * activity_home.xml
 * activity_add_note.xml
 * note_card.xml
+
+**Drawables:**
+
+* set_priority_icon.xml

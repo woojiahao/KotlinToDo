@@ -141,4 +141,4 @@ This behavior is utilised in the **Home** activity when we change the way the Re
 
 ***
 
-Next: [Adding Priorities](/)
+Next: [Adding Priorities](priority_system.md)
