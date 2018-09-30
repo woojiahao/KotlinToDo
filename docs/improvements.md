@@ -147,10 +147,10 @@ Next, since `notes` is simply a mapped collection of the `ds.children` list, we 
 
 ```kotlin
 override fun onDataChange(ds: DataSnapshot) {
-    val notes = ds.children.map {
-        val note = it.getValue(Note::class.java)
-        note?.let { n -> notes.add(n) }
-    }
+    val notes = ds
+            .children
+            .map { it.getValue(Note::class.java) }
+            .filter { it != null }
 
     onComplete(notes)
 }
