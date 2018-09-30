@@ -102,8 +102,8 @@ Now that we have devised a strategy to store note data into Firebase, we have to
                     val notes = mutableListOf<Note>()
                     for (child in ds.children) {
                         val note = snapshot.getValue(Note::class.java)
-                        if (note != null) {
-                            notes.add(note)
+                        note?.let {
+                            notes.add(it)
                         }
                     }
 
