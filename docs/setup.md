@@ -22,7 +22,7 @@ These set of steps are ideal if you do not own an Android device that has Nougat
    * **Application name:** HelloWorld
    * **Company domain:** me.&lt;*your name*&gt;
    * **Project location:** *Leave the default*
-   * **Include Kotlin support:** ✔️
+   * **Include Kotlin support:** :ballot_box_with_check:
 4. Select **API 19: Android 4.4 (KitKat)** as the minimum SDK and select **Next**. This specifies the lowest API level that your application will support.
 5. Select **Empty Activity > Next** and leave the next screen as what they display and select **Finish**.
 6. Android Studio will load the project, if this is the first time you are building a project from Gradle, it will take a while so sit back and do something else.
@@ -31,7 +31,7 @@ These set of steps are ideal if you do not own an Android device that has Nougat
 9. Select the previously created Android emulator and proceed with running the application.
 10. Since this should be the first time you run the emulator, it will take a while to set up.
 11. Once it has completed loading, your application will open shortly and you will see the text **"Hello World"** displayed in your application. 
-12. You have just run your first Android program! Congratulations. 🎉
+12. You have just run your first Android program! Congratulations. :tada:
 
 ## Configuring a Device
 These set of steps are ideal if you own an Android device that has Nougat and above running on it.

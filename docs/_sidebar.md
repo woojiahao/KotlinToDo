@@ -9,3 +9,4 @@
 * [Storing And Retrieving Data](firebase.md)
 * [Adding Priorities](priority_system.md)
 * [Improving KotlinToDo](improvements.md)
+* [Conclusion](conclusion.md)
