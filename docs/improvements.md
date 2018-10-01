@@ -143,14 +143,15 @@ override fun onDataChange(ds: DataSnapshot) {
 }
 ```
 
-Next, since `notes` is simply a mapped collection of the `ds.children` list, we can use `map()`
+Next, since `notes` is simply a mapped collection of the `ds.children` list, we can use `map()`. Since we are filtering 
+only the non-null notes, there is a version of the `.filter()` method that filters off any null items, called `.filterNotNull()`
 
 ```kotlin
 override fun onDataChange(ds: DataSnapshot) {
     val notes = ds
             .children
             .map { it.getValue(Note::class.java) }
-            .filter { it != null }
+            .filterNotNull()
     
     onComplete(notes)
 }

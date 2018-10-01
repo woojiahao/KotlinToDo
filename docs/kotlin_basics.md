@@ -111,6 +111,8 @@ for (name in names) {
 }
 ```
 
+More on [Kotlin's Flow Control.](https://kotlinlang.org/docs/reference/control-flow.html) 
+
 ## Functions
 Kotlin allows for functions to be declared in the global scope (not within any class), this makes creating utility functions a lot easier for Kotlin as they are not needed to be tied down into a single class.
 

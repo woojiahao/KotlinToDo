@@ -17,22 +17,22 @@ enum class Color {
 In a similar fashion to regular classes, enumerations can have access to a primary constructor which dictates the arguments that each constant has to pass to it.
 
 ```kotlin
-enum class Color(val code: Int) {
-    Red(0xFF0000),
-    Green(0x00FF00),
-    Blue(0x0000FF);
+enum class Animal(val color: String, val latinName: String) {
+    Dog("brown", "Canis lupus familiaris"),
+    Cat("black", "Felis catus"),
+    Hamster("orange", "Cricetinae");
 }
 ```
 
-By doing so, you have assigned each of the constants their own set of color codes:
+The following table depicts the association between the constant in an enumeration and the properties
 
-|Constant|Code|
-|---|---|
-|Red|0xFF0000|
-|Green|0x00FF00|
-|Blue|0x0000FF|
+|Constant|color|latinName|
+|---|---|---|
+|Dog|brown|Canis lupus familiaris|
+|Cat|black|Felis catus|
+|Hamster|orange|Cricetinae|
 
-You can reference each constant in an enumeration via `Color.Red` and access the properties of the enumeration using `Color.Red.code`.
+You can reference each constant in an enumeration via `Animal.Dog` and access the properties of the enumeration using `Animal.Dog.latinName`.
 
 ### Methods
 You can also add methods to the enumeration that can be accessed by all of the constants in the enumeration.
