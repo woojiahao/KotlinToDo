@@ -29,6 +29,9 @@ rest as it is
 5. When asked to add the dependencies, you do not have to add them into the files, *but* you must 
 navigate to `build.gradle` in the `app` folder and uncomment the last line.
 6. Restart the application to ensure that you have added Firebase support properly
+7. Navigate to the side bar and under `Develop`, expand the tab and click on `Database`
+8. Scroll to the point where you can see the text `Realtime Database` and click on `Create New Database`
+9. When given the choice of modes to set the Firebase account to, set it to `Test Mode`
 
 ## Storing Data
 We will need to store the notes we add to Firebase and later, retrieve them.
@@ -52,7 +55,7 @@ data class:
    
    ```kotlin
    //... {
-       constructor() : this("", "", "") {}
+       constructor() : this("", "", "")
    }
    ```
 
@@ -61,11 +64,8 @@ data class:
    
    ```kotlin
    fun addNoteToDatabase(note: Note) {
-       val noteNode = FirebaseDatabase.getInstance()
-                                        .reference
-                                        .child("notes")
-                                        .push()
-       note.noteId = noteNode.key
+       val noteNode = FirebaseDatabase.getInstance().reference.child("notes").push()
+       noteNode.key?.let { note.noteId = it }
        noteNode.setValue(note)
    }
    ```
@@ -82,7 +82,18 @@ action to the FAB
    }
    ```
 
-6. When you re-run the application, you will be able to view in Firebase's realtime database that a 
+6. Inside `Home.kt`, add the argument of `""` to the end of each note:
+   
+   ```kotlin
+   val notes = listOf(
+		Note("Note 1", "Blah blah", ""),
+		Note("Note 2", "Blah blah", ""),
+		Note("Note 3", "Blah blah", ""),
+		Note("Note 4", "Blah blah", "")
+   )
+   ```
+
+7. When you re-run the application, you will be able to view in Firebase's realtime database that a 
 new node is added to the `notes` node every time you add a new note.
 
 **Break Down:**
