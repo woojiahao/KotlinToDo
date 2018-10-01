@@ -7,13 +7,13 @@ import chill.me.kotlintodo.utility.getCurrentDateTimeFormatted
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Note(val title: String,
-				val content: String,
-				val creationDate: String,
-				val dueDate: String? = null,
-				val priority: Priority = Lowest,
-				var noteId: String? = null): Parcelable {
-	constructor() : this("", "", "", getCurrentDateTimeFormatted()) {
-
-	}
+data class Note(
+	val title: String,
+	val content: String,
+	val creationDate: String,
+	val dueDate: String? = null,
+	val priority: Priority = Lowest,
+	var noteId: String? = null
+) : Parcelable {
+	constructor() : this("", "", "", getCurrentDateTimeFormatted())
 }

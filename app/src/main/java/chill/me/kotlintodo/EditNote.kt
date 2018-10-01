@@ -40,26 +40,37 @@ class EditNote : AppCompatActivity() {
 
 	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 		when (item!!.itemId) {
-			R.id.editNoteSetDueDate -> {
-				val now = DateTime.now()
-				DatePickerDialog(
-					this, { _, year, month, day -> dueDate = "$day/$month/$year" },
-					now.year, now.monthOfYear, now.dayOfMonth).show()
-			}
-			R.id.editNoteSetPriority -> {
-				val dialogBuilder = AlertDialog.Builder(this)
-				dialogBuilder.setTitle("Select Task Priority")
-				dialogBuilder.setSingleChoiceItems(
-					Priority.values().map { it.name }.toTypedArray(),
-					Priority.valueOf(priority.name).ordinal
-				) { _, selected -> priority = Priority.values()[selected] }
-				dialogBuilder.setPositiveButton("Confirm") { _, _ -> }
-				dialogBuilder.setCancelable(false)
-				dialogBuilder.show()
-			}
 			android.R.id.home -> NavUtils.navigateUpFromSameTask(this)
+			R.id.editNoteSetDueDate -> datePicker()
+			R.id.editNoteSetPriority -> prioritySelection()
 		}
 		return true
+	}
+
+	private fun datePicker() {
+		val now = DateTime.now()
+		DatePickerDialog(
+			this,
+			{ _, year, month, day ->
+				dueDate = "${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/$year"
+			},
+			now.year, now.monthOfYear, now.dayOfMonth)
+			.show()
+	}
+
+	private fun prioritySelection() {
+		AlertDialog
+			.Builder(this)
+			.setTitle("Select Task Priority")
+			.setSingleChoiceItems(
+				Priority.values().map { it.name }.toTypedArray(),
+				Priority.valueOf(priority.name).ordinal
+			) { _, selected ->
+				priority = Priority.values()[selected]
+			}
+			.setPositiveButton("Confirm") { _, _ -> }
+			.setCancelable(false)
+			.show()
 	}
 
 	private fun init() {

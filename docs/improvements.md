@@ -151,7 +151,7 @@ override fun onDataChange(ds: DataSnapshot) {
             .children
             .map { it.getValue(Note::class.java) }
             .filter { it != null }
-
+    
     onComplete(notes)
 }
 ```
