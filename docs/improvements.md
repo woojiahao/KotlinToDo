@@ -150,7 +150,7 @@ override fun onDataChange(ds: DataSnapshot) {
     val notes = mutableListOf<Note>()
     ds.children.forEach {
         val note = it.getValue(Note::class.java)
-        note?.let { n -> notes.add(n) }
+        note?.let { notes.add(it) }
     }
 
     onComplete(notes)
@@ -163,11 +163,7 @@ filters off any null items, called `.filterNotNull()`
 
 ```kotlin
 override fun onDataChange(ds: DataSnapshot) {
-    val notes = ds
-            .children
-            .map { it.getValue(Note::class.java) }
-            .filterNotNull()
-    
+    val notes = ds.children.map { it.getValue(Note::class.java) }.filterNotNull()
     onComplete(notes)
 }
 ```
@@ -327,6 +323,7 @@ and pass this instance variable to the NoteAdapter
             notesList.addItemDecoration(SpacingDecoration(0, 32, 1))
             notesList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
             getNotes {
+                notes.clear()
                 notes.addAll(it)
                 notesList.adapter = NoteAdapter(this, notes)
             }
@@ -334,7 +331,27 @@ and pass this instance variable to the NoteAdapter
    }
    ```
 
-5. Next, we will begin to implement the logic for the filtering of notes:
+5. Move the NoteAdapter to an instance variable as well:
+   
+   ```kotlin
+   class Home : AppCompactActivity() {
+       private val notes = mutableListOf<Note>()
+       private val noteAdapter = NoteAdapter(this, notes)
+
+       // ...
+       private fun init() {
+           notesList.addItemDecoration(SpacingDecoration(0, 32, 1))
+           notesList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+           getNotes {
+               notes.clear()
+               notes.addAll(it)
+               notes.adapter = noteAdapter
+           }
+       }
+   }
+   ```
+
+6. Next, we will begin to implement the logic for the filtering of notes:
    
    ```kotlin
    // inside the 'when' in onOptionsItemSelected
@@ -348,19 +365,19 @@ and pass this instance variable to the NoteAdapter
            R.id.filterLowPriority -> filterPriority(Priority.Low)
        }
 
-       notes.notifyDataSetChanged()
+       noteAdapter.notifyDataSetChanged()
        true
    }
 
    // ... outside of onOptionsItemSelected
    private fun filterPriority(priority: Priority) {
-       val filtered = notes.filter { it.priority = priority }
+       val filtered = notes.filter { it.priority == priority }
        notes.clear()
        notes.addAll(filtered)
    }
    ```
 
-6. Run the application and try filtering the notes
+7. Run the application and try filtering the notes
 
 **Break down:**
 
