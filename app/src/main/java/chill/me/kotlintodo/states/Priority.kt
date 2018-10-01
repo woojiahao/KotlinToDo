@@ -9,5 +9,5 @@ enum class Priority(val color: String) {
 	Low("448AFF"),
 	Lowest("69F0AE");
 
-	fun parseColor() = Color.parseColor(this.color)
+	fun parseColor() = Color.parseColor("#$color")
 }

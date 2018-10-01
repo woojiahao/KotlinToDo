@@ -38,28 +38,8 @@ class Home : AppCompatActivity() {
 	}
 
 	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-		when (item!!.itemId) {
-			R.id.homeFilterNotes -> {
-				var filterType: FilterType = None
-				val filterIconView = findViewById<View>(R.id.homeFilterNotes)
-				val popupMenu = PopupMenu(this, filterIconView)
-				popupMenu.menuInflater.inflate(R.menu.filter_menu, popupMenu.menu)
-				popupMenu.setOnMenuItemClickListener { selectedItem ->
-					filterType = when (selectedItem.itemId) {
-						R.id.filterHighestPriority -> Highest
-						R.id.filterHighPriority -> High
-						R.id.filterMediumPriority -> Medium
-						R.id.filterLowPriority -> Low
-						R.id.filterLowestPriority -> Lowest
-						R.id.filterNameAscending -> Ascending
-						R.id.filterNameDescending -> Descending
-						else -> None
-					}
-					filterNotes(filterType)
-					true
-				}
-				popupMenu.show()
-			}
+		when (item?.itemId) {
+			R.id.homeFilterNotes -> showFilterMenu()
 		}
 		return true
 	}
@@ -67,6 +47,26 @@ class Home : AppCompatActivity() {
 	override fun onResume() {
 		super.onResume()
 		loadNotes()
+	}
+
+	private fun showFilterMenu() {
+		val popupMenu = PopupMenu(this, findViewById<View>(R.id.homeFilterNotes))
+		popupMenu.menuInflater.inflate(R.menu.filter_menu, popupMenu.menu)
+		popupMenu.setOnMenuItemClickListener { selectedItem ->
+			val filterType = when (selectedItem.itemId) {
+				R.id.filterHighestPriority -> Highest
+				R.id.filterHighPriority -> High
+				R.id.filterMediumPriority -> Medium
+				R.id.filterLowPriority -> Low
+				R.id.filterLowestPriority -> Lowest
+				R.id.filterNameAscending -> Ascending
+				R.id.filterNameDescending -> Descending
+				else -> None
+			}
+			filterNotes(filterType)
+			true
+		}
+		popupMenu.show()
 	}
 
 	private fun init() {

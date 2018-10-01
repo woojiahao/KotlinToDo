@@ -35,9 +35,7 @@ class NoteAdapter(private val context: Context, private val notes: List<Note>) :
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
 		ViewHolder(
-			LayoutInflater
-				.from(parent.context)
-				.inflate(R.layout.note_card, parent, false)
+			LayoutInflater.from(parent.context).inflate(R.layout.note_card, parent, false)
 		)
 
 	override fun getItemCount() = notes.size
@@ -50,10 +48,7 @@ class NoteAdapter(private val context: Context, private val notes: List<Note>) :
 		holder.setNotePriority(note.priority)
 
 		holder.v.setOnClickListener {
-			context.startActivity(
-				Intent(context, EditNote::class.java)
-					.putExtra("note", note)
-			)
+			context.startActivity(Intent(context, EditNote::class.java).putExtra("note", note))
 		}
 	}
 }

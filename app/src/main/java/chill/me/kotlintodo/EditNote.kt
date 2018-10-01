@@ -41,13 +41,13 @@ class EditNote : AppCompatActivity() {
 	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 		when (item!!.itemId) {
 			android.R.id.home -> NavUtils.navigateUpFromSameTask(this)
-			R.id.editNoteSetDueDate -> datePicker()
-			R.id.editNoteSetPriority -> prioritySelection()
+			R.id.editNoteSetDueDate -> showDatePicker()
+			R.id.editNoteSetPriority -> showPrioritySelection()
 		}
 		return true
 	}
 
-	private fun datePicker() {
+	private fun showDatePicker() {
 		val now = DateTime.now()
 		DatePickerDialog(
 			this,
@@ -58,7 +58,7 @@ class EditNote : AppCompatActivity() {
 			.show()
 	}
 
-	private fun prioritySelection() {
+	private fun showPrioritySelection() {
 		AlertDialog
 			.Builder(this)
 			.setTitle("Select Task Priority")

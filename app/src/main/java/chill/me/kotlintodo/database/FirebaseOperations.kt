@@ -7,11 +7,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 fun addNoteToDatabase(note: Note) {
-	val noteNode = FirebaseDatabase
-		.getInstance()
-		.reference
-		.child("notes")
-		.push()
+	val noteNode = FirebaseDatabase.getInstance().reference.child("notes").push()
 	note.noteId = noteNode.key
 	noteNode.setValue(note)
 }

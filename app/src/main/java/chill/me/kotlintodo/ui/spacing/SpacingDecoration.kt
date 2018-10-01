@@ -7,10 +7,11 @@ import chill.me.kotlintodo.ui.spacing.Direction.*
 import kotlin.math.ceil
 import kotlin.math.floor
 
-class SpacingDecoration(private val horizontalSpacing: Int,
-						private val verticalSpacing: Int,
-						private val columnCount: Int)
-	: RecyclerView.ItemDecoration() {
+class SpacingDecoration(
+	private val horizontalSpacing: Int,
+	private val verticalSpacing: Int,
+	private val columnCount: Int
+) : RecyclerView.ItemDecoration() {
 
 	init {
 		if (columnCount <= 0) throw SpacingDecorationError("Cannot have a column count of 0 or less")
