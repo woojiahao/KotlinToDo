@@ -26,8 +26,9 @@ format like this:
 3. When the project has been created, you will need to add Android support to the project
 4. For the project root, you will have to set it to be `chill.me.kotlintodo` and you can leave the 
 rest as it is
-5. Follow the remainder of the instructions and you should be able to test if your application is 
-connected to Firebase
+5. When asked to add the dependencies, you do not have to add them into the files, *but* you must 
+navigate to `build.gradle` in the `app` folder and uncomment the last line.
+6. Restart the application to ensure that you have added Firebase support properly
 
 ## Storing Data
 We will need to store the notes we add to Firebase and later, retrieve them.
