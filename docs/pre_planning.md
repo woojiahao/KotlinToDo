@@ -14,4 +14,5 @@ With these requirements in mind, we can gauge that we will need the following:
 2. **List View** - RecyclerView? ListView?
 3. **Constants for each priority** - Enumeration? Interface?
 
-For this application, we will be using **Firebase** to store the todos, a **RecyclerView** to list out the data and use a set of constants stored in an **enumeration** to represent each priority.
+For this application, we will be using **Firebase** to store the todos, a **RecyclerView** to list 
+out the data and use a set of constants stored in an **enumeration** to represent each priority.
