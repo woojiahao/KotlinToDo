@@ -11,11 +11,11 @@ import android.view.MenuItem
 import android.view.View
 import chill.me.kotlintodo.adapters.NoteAdapter
 import chill.me.kotlintodo.database.getNotes
+import chill.me.kotlintodo.decoration.SpacingDecoration
 import chill.me.kotlintodo.models.Note
 import chill.me.kotlintodo.states.FilterType
 import chill.me.kotlintodo.states.FilterType.*
 import chill.me.kotlintodo.states.Priority
-import chill.me.kotlintodo.ui.spacing.SpacingDecoration
 import kotlinx.android.synthetic.main.activity_home.*
 
 class Home : AppCompatActivity() {

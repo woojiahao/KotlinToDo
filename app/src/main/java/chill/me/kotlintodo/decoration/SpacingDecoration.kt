@@ -1,9 +1,9 @@
-package chill.me.kotlintodo.ui.spacing
+package chill.me.kotlintodo.decoration
 
 import android.graphics.Rect
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import chill.me.kotlintodo.ui.spacing.Direction.*
+import chill.me.kotlintodo.decoration.Direction.*
 import kotlin.math.ceil
 import kotlin.math.floor
 

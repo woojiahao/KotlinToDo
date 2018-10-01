@@ -1,3 +1,3 @@
-package chill.me.kotlintodo.ui.spacing
+package chill.me.kotlintodo.decoration
 
 class SpacingDecorationError(err: String) : Exception(err)
