@@ -93,7 +93,7 @@ to users.
        Medium("FFA726"), 
        Low("69F0AE");
 
-       fun parseColor() = Color.parseColor("#${this.code}")
+       fun parseColor() = Color.parseColor("#$color")
    }
    ```
 
@@ -171,10 +171,10 @@ with the ability to customize and set the priority of each note.
 
                 val dialogBuilder = AlertDialog.Builder(this)
                 dialogBuilder.setTitle("Select Task Priority")
-                dialogBuilder.setSingleChoiceItem(
+                dialogBuilder.setSingleChoiceItems(
                     choices,
                     Priority.valueOf(priority.name).ordinal
-                ) { _, selected -> Priority.valueOf(selected) }
+                ) { _, selected -> priority = Priority.values()[selected] }
                 dialogBuilder.setPositiveButton("Confirm") { _, _ -> }
                 dialogBuilder.setCancelable(false)
                 dialogBuilder.show()
@@ -234,7 +234,7 @@ look like:
        val priority: Priority,
        var noteId: String
    ) {
-       constructor() : this("", "", Priority.LOW, "") { }
+       constructor() : this("", "", Priority.LOW, "")
    }
    ```
 
