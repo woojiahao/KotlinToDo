@@ -1,19 +1,26 @@
 # Improving KotlinToDo
-We have built the basics of the application. We can now move our attention to improving the existing code using some of Kotlin's more advanced and interesting features.
+We have built the basics of the application. We can now move our attention to improving the existing 
+code using some of Kotlin's more advanced and interesting features.
 
 We will be using this new knowledge to build out a filtering system for the notes as well.
 
 ## Collections
-In Kotlin, there are a myriad of methods built for collections of information that makes it a lot easier to manipulate and deal with structures like lists or maps.
+In Kotlin, there are a myriad of methods built for collections of information that makes it a lot 
+easier to manipulate and deal with structures like lists or maps.
 
-This is akin to the [stream API](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html) that was introduced in Java 8.
+This is akin to the [stream API](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html) 
+that was introduced in Java 8.
 
 The core 3 methods used will be **.forEach()**, **.map()** and **.filter()**
 
-These are advantageous to use over traditional means as it offers a far more straight-forward approach to list manipulation and reading chains of these methods are a lot easier to digest than when everything is embedded within a for loop. [This video](https://youtu.be/1OpAgZvYXLQ) goes into the advantages of using such constructs.
+These are advantageous to use over traditional means as it offers a far more straight-forward 
+approach to list manipulation and reading chains of these methods are a lot easier to digest than 
+when everything is embedded within a for loop. [This video](https://youtu.be/1OpAgZvYXLQ) goes into 
+the advantages of using such constructs.
 
 ### .forEach()
-`forEach()` will loop through an entire list whilst you supply some set of behavior to execute for each element in the list.
+`forEach()` will loop through an entire list whilst you supply some set of behavior to execute for 
+each element in the list.
 
 This is a way to reduce a for loop into a much clearer and more concise construct.
 
@@ -39,7 +46,8 @@ fruits.forEach { println("The fruit is: ${it}")}
 In both cases, it will print **"The fruit is: &lt;fruit name&gt;"** for every fruit in the list. 
 
 ### .map()
-`map()` will loop through a list of data and return a new list of data based on a set of actions that to be performed on the original list of data.
+`map()` will loop through a list of data and return a new list of data based on a set of actions 
+that to be performed on the original list of data.
 
 This is useful when you wish to perform the same action on every item in a list.
 
@@ -61,10 +69,12 @@ for (number in numbers) {
 val newNumbers = numbers.map { it * 2 }
 ```
 
-In both cases, `newNumbers` is a new list of numbers with each number being twice of that in the original `numbers` list ([2, 4, 6, 8, 10, 12, 14, 16, 18, 20]). 
+In both cases, `newNumbers` is a new list of numbers with each number being twice of that in the 
+original `numbers` list ([2, 4, 6, 8, 10, 12, 14, 16, 18, 20]). 
 
 ### .filter()
-`filter()` will loop through a list of data and return a new list that consists of the elements of the original list that passes a Boolean condition.
+`filter()` will loop through a list of data and return a new list that consists of the elements of 
+the original list that passes a Boolean condition.
 
 **Traditional approach:**
 
@@ -86,10 +96,12 @@ for (number in numbers) {
 val evenNumbers = numbers.filter { it % 2 == 0 }
 ```
 
-In both cases, the even numbers is extracted from the original list of numbers and added to the new list, `evenNumbers`. 
+In both cases, the even numbers is extracted from the original list of numbers and added to the new 
+list, `evenNumbers`. 
 
 ### Chaining methods
-These collection methods are not just one-use only. They can be chained one after the other to form method chains that perform a set of sequential operations on a list of data.
+These collection methods are not just one-use only. They can be chained one after the other to form 
+method chains that perform a set of sequential operations on a list of data.
 
 ```kotlin
 val fruits = listOf(
@@ -111,7 +123,8 @@ fruits
 There are several places in the application that we can replace with Collection methods. 
 
 ### Firebase Operations
-Notice that in the `getNotes() > onDataChange()` method of our Firebase access class, we use looping to load the notes. However, this can be simplified using the previously discussed methods.
+Notice that in the `getNotes() > onDataChange()` method of our Firebase access class, we use looping 
+to load the notes. However, this can be simplified using the previously discussed methods.
 
 **Original:**
 
@@ -129,7 +142,8 @@ override fun onDataChange(ds: DataSnapshot) {
 
 **New:**
 
-Firstly, the `for` loop is sticking out like a sore thumb, thus we will replace it with a `forEach()` call.
+Firstly, the `for` loop is sticking out like a sore thumb, thus we will replace it with a `forEach()` 
+call.
 
 ```kotlin
 override fun onDataChange(ds: DataSnapshot) {
@@ -143,8 +157,9 @@ override fun onDataChange(ds: DataSnapshot) {
 }
 ```
 
-Next, since `notes` is simply a mapped collection of the `ds.children` list, we can use `map()`. Since we are filtering 
-only the non-null notes, there is a version of the `.filter()` method that filters off any null items, called `.filterNotNull()`
+Next, since `notes` is simply a mapped collection of the `ds.children` list, we can use `map()`. 
+Since we are filtering only the non-null notes, there is a version of the `.filter()` method that 
+filters off any null items, called `.filterNotNull()`
 
 ```kotlin
 override fun onDataChange(ds: DataSnapshot) {
@@ -157,7 +172,9 @@ override fun onDataChange(ds: DataSnapshot) {
 }
 ```
 
-Then, there's a special form of `map()` called `mapNotNull()` which creates a map of data where each item in the map is not null, as we are performing what is essentially a **non-null** check on the note before adding it to the map, we can make use of this form of map.
+Then, there's a special form of `map()` called `mapNotNull()` which creates a map of data where each 
+item in the map is not null, as we are performing what is essentially a **non-null** check on the 
+note before adding it to the map, we can make use of this form of map.
 
 ```kotlin
 override fun onDataChange(ds: DataSnapshot) {
@@ -166,21 +183,72 @@ override fun onDataChange(ds: DataSnapshot) {
 }
 ```
 
-Lastly, we are not using `notes` in any other place other than as an argument for `onComplete` thus, we can remove the variable and simply pass the `onComplete` method the map.
+Lastly, we are not using `notes` in any other place other than as an argument for `onComplete` thus, 
+we can remove the variable and simply pass the `onComplete` method the map.
 
 ```kotlin
 override fun onDataChange(ds: DataSnapshot) =
     onComplete(ds.children.mapNotNull { it.getValue(Note::class.java) })
 ```
 
-And with that, we've successfully converted an otherwise long and tedious process of retrieving the stored notes into a concise and easy to read one-line function.
+And with that, we've successfully converted an otherwise long and tedious process of retrieving the 
+stored notes into a concise and easy to read one-line function.
+
+### Cleaning Up Excess Declarations
+Inside of the `AddNote.kt > onOptionsItemSelected()` method, notice that we have explicitly declared
+an array of strings for the options to be displayed. However, these options correspond directly with
+the name of each of the constants in the `Priority` class, thus we can leverage off the built-in
+methods that enumeration classes give us as well as use some collection methods.
+
+**Original:**
+
+```kotlin
+R.id.addNoteSetPriority -> {
+    val choices = arrayOf(
+        "High", "Medium", "Low"
+    ) 
+
+    val dialogBuilder = AlertDialog.Builder(this)
+    dialogBuilder.setTitle("Select Task Priority")
+    dialogBuilder.setSingleChoiceItem(
+        choices,
+        Priority.valueOf(priority.name).ordinal
+    ) { _, selected -> Priority.valueOf(selected) }
+    dialogBuilder.setPositiveButton("Confirm") { _, _ -> }
+    dialogBuilder.setCancelable(false)
+    dialogBuilder.show()
+}
+```
+
+**New:**
+
+```kotlin
+R.id.addNoteSetPriority -> {
+    val dialogBuilder = AlertDialog.Builder(this)
+    dialogBuilder.setTitle("Select Task Priority")
+    dialogBuilder.setSingleChoiceItem(
+        Priority.values().map { it.name }.toTypedArray(),
+        Priority.valueOf(priority.name).ordinal
+    ) { _, selected -> Priority.valueOf(selected) }
+    dialogBuilder.setPositiveButton("Confirm") { _, _ -> }
+    dialogBuilder.setCancelable(false)
+    dialogBuilder.show()
+}
+```
+
+What we have done is to essentially remove the declaration of the `choices` array and instead, made
+use of the fact that every enumeration gives us access to all the constants and each constant's name
+can be pulled into a list of it's own. We then have to use the `toTypedArray()` method which converts
+a `List<String>` to `Array<String>`.
 
 ### Ordering/Filtering Notes
-We want to be able to filter our notes displayed based on certain criteria, namely, ordering them by title and filtering them by priority.
+We want to be able to filter our notes displayed based on certain criteria, namely, ordering them by 
+title and filtering them by priority.
 
 **Follow Along:**
 
-Like when we were making the set priority feature, we want to add a menu item to the Home activity action bar to allow users to filter/order the data.
+Like when we were making the set priority feature, we want to add a menu item to the Home activity 
+action bar to allow users to filter/order the data.
 
 1. Add a new menu resource file, `home_menu.xml` to represent the filter item and add the following:
    
@@ -196,7 +264,8 @@ Like when we were making the set priority feature, we want to add a menu item to
 </menu>
 ```
 
-2. After that, we will make another menu resource file, `filter_menu.xml` to represent the set of actions users can do:
+2. After that, we will make another menu resource file, `filter_menu.xml` to represent the set of 
+actions users can do:
    
    ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -223,7 +292,8 @@ Like when we were making the set priority feature, we want to add a menu item to
 </menu>
 ```
 
-3. Then we attach the menu to the action bar in Home as well as create a popup menu for whenever the user presses on the menu item.
+3. Then we attach the menu to the action bar in Home as well as create a popup menu for whenever the 
+user presses on the menu item.
    
    ```kotlin
    // ...
@@ -245,7 +315,8 @@ Like when we were making the set priority feature, we want to add a menu item to
    }
    ```
 
-4. We can then declare an instance variable to hold onto the notes when they are loaded from Firebase and pass this instance variable to the NoteAdapter
+4. We can then declare an instance variable to hold onto the notes when they are loaded from Firebase 
+and pass this instance variable to the NoteAdapter
    
    ```kotlin
    class Home : AppCompactActivity() {
@@ -293,14 +364,24 @@ Like when we were making the set priority feature, we want to add a menu item to
 
 **Break down:**
 
-Like the last time, we are going to add a menu resource file for the menu item in the Home action bar. We also add a new menu resource file for the list of options that will be displayed to users when they tap on the menu item.
+Like the last time, we are going to add a menu resource file for the menu item in the Home action bar. 
+We also add a new menu resource file for the list of options that will be displayed to users when 
+they tap on the menu item.
 
-The options for filtering is displayed using a popup menu. When making the popup menu, we had to find a view to anchor it to, thus we used `findViewById` to retrieve the menu item.
+The options for filtering is displayed using a popup menu. When making the popup menu, we had to 
+find a view to anchor it to, thus we used `findViewById` to retrieve the menu item.
 
-Then, we moved the `notes` list outside of the `init()` method as we want to be able to use it outside of that method.
+Then, we moved the `notes` list outside of the `init()` method as we want to be able to use it 
+outside of that method.
 
-For sorting the notes by name, we use the `.sortBy()` and `.sortByDescending()` methods, sorting them by the title.
+For sorting the notes by name, we use the `.sortBy()` and `.sortByDescending()` methods, sorting 
+them by the title.
 
-For the filtering, we are simply going to filter the notes list with the condition that only notes with the priority assigned to the selected filter will be kept. For the new notes to be the only thing displayed, we have to clear out the original set of notes and re-populate the notes list with the filtered set of notes.
+For the filtering, we are simply going to filter the notes list with the condition that only notes 
+with the priority assigned to the selected filter will be kept. For the new notes to be the only 
+thing displayed, we have to clear out the original set of notes and re-populate the notes list with 
+the filtered set of notes.
 
-After we manipulate the contents of `notes`, we are going to call the method `notifyDataSetChanged()` which will inform the RecyclerView to refresh the layout with the new set of data, effectively, sorting/filtering the data.
+After we manipulate the contents of `notes`, we are going to call the method `notifyDataSetChanged()` 
+which will inform the RecyclerView to refresh the layout with the new set of data, effectively, 
+sorting/filtering the data.
