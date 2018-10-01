@@ -64,7 +64,11 @@ Another common issue encountered might be virtualization, and once again, the [o
 4. Unzip the downloaded file.
 5. Launch Android Studio.
 6. Select the option to **Import a project from Gradle** and navigate to the downloaded folder, select the root folder of the project and click **OK**.
-7. Run the application on your emulator/device and you should be greeted with a bare bones Hello World application with some files included beforehand.
+7. Run the application on your emulator/device and you should be greeted with a bare bones application with some files included beforehand.
+
+### Initial Run
+
+<img src="blank.jpg" style="width: 45%; box-shadow: #dedede 3px 3px 5px;">
 
 ### What is included? {docsify-ignore}
 The project folder includes the following:
@@ -82,7 +86,3 @@ The project folder includes the following:
 * activity_home.xml
 * activity_add_note.xml
 * note_card.xml
-
-**Drawables:**
-
-* set_priority_icon.xml
