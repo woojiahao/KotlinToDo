@@ -1,9 +1,15 @@
 # Setting Up
 To follow this talk, you will need only a single tool, **Android Studio.**
 
+**Note:** If you are using an Android device that has Nougat and above, you can opt out of the following steps and skip to [configuring my device.](setup.md?id=configuring-a-device)
+
+## Installing Android Studio
 The installation process of Android Studio is relatively simple and painless but you will have to ensure that you are able to run an Android Emulator and successfully run an Android sample example on the emulator.
 
-**Note:** If you are using an Android device that has Nougat and above, you can opt out of the following steps and skip to [configuring my device.](setup.md?id=configuring-a-device)
+1. Download the Android Studio installation from [here.](https://developer.android.com/studio/)
+2. Once you have downloaed the installer, you can down launch it and follow the instructions that they provide.
+3. If you are unsure of any of the installation steps, leave it to the default settings and proceed.
+4. After installating Android Studio, be sure to configure [an emulator](setup.md?id=configuring-an-emulator) or [you device](setup.md?id=configuring-a-device) for Android Development.
 
 ## Configuring an Emulator
 These set of steps are ideal if you do not own an Android device that has Nougat and above running on it.
