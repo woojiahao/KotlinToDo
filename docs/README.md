@@ -23,6 +23,21 @@ The talk will be split into 3 sections:
 
 The slides used for the talk can be found [here.](https://github.com/woojiahao/KotlinToDo/blob/master/docs/Slides.pptx)
 
+## Talk Schedule
+|Topic|Duration|Details|
+|---|---|---|
+|Introduction|5 min|Introduce the purpose of the talk and myself|
+|What is Kotlin?|5 min|Discuss the history of Kotlin and its uses|
+|Why use Kotlin?|5 min|Discuss the benefits of using Kotlin|
+|Basics of Kotlin|1 hour|Introduce the basics of Kotlin's syntax and to develop a level of competency when reading the code|
+|**Break**|20 min|||
+|Building KotlinToDo (Part 1)|1.5 hours|Storing and retrieving data + Viewing data|
+|**Break**|20 min|||
+|Building KotlinToDo (Part 2)|1.5 hours|Adding a priority system to the application|
+|**Break**|20 min|||
+|Improving the application|30 min|Improve the application by making use of advanced Kotlin concepts|
+|Conclusion|10 min|Conclude the session|
+
 ## Further Reading
 If you have taken an interest in Kotlin, these are several resources that you can use to learn 
 about more about it and see how it is being used:
